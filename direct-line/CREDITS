@@ -1,0 +1,14 @@
+Direct Line — a promo film for DMtheFounder (dmthefounder.com)
+
+Picture, score, foley and mix: made in code with the Lemo-Opuscar library
+(github.com/s87343472/lemo-opuscar, a fork of github.com/lemomo-ai/lemo-opuscar, MIT).
+
+Font: Instrument Sans (SIL Open Font License 1.1), the site's own font files from public/fonts/.
+Logo: the DMtheFounder mark, from src/components/shared/logo.tsx (owned by DMtheFounder).
+Voice: Kokoro v1.0 (Apache 2.0) via kokoro-onnx, voice af_heart.
+
+Music samples:
+Drums: "MuldjordKit" by Lars Muldjord (drumgizmo.org), FreePats version, licensed under CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/)
+Samples (CC0): FreePats project (freepats.zenvoid.org), Versilian Community Sample Library (Versilian Studios)
+
+Facts and counts on screen: see FACTS.md. Companies, handles and post texts on the cards are fictional.
