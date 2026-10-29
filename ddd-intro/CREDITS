@@ -1,0 +1,20 @@
+The Drawing Comes First — an introduction to Document-Driven Development
+(github.com/s87343472/document-driven-development, MIT, by SagaSu)
+
+Picture, score, foley and mix: made in code with the Lemo-Opuscar library
+(github.com/s87343472/lemo-opuscar, a fork of github.com/lemomo-ai/lemo-opuscar, MIT).
+paper.js and draw.js are the library's Blueprint engine (MIT), used unchanged.
+
+Fonts (SIL Open Font License 1.1):
+- Architects Daughter — Kimberly Geswein
+- B612 — Airbus / Intactile Design / Polarsys
+- Allura — Robert Leuschke (TypeSETit)
+- Zhuque Fangsong (朱雀仿宋) — Zhejiang JadeFoci Technology, TrionesType; web split by @chinese-fonts/zqfs (MIT)
+
+Voices:
+- English: Kokoro v1.0 (Apache 2.0) via kokoro-onnx, voice af_heart
+- Chinese: Microsoft Edge neural TTS (zh-CN-XiaoxiaoNeural) via edge-tts
+
+Music samples (CC0): Versilian Community Sample Library (Versilian Studios): harpsichord, harp, glockenspiel
+
+Facts on screen: see FACTS.md. The bridge, its dimensions and the check list are illustrative.

@@ -1,0 +1,89 @@
+[
+ {
+  "id": "l01",
+  "text": "The fifteen minutes you save by skipping the spec,",
+  "sub": "The 15 minutes you save by skipping the spec,",
+  "asr": "The 15 minutes you save by skipping the spec,",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l02",
+  "text": "become a three-hour debug bill.",
+  "sub": "become a 3-hour debug bill.",
+  "asr": "become a 3 hour debug bill.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l03",
+  "text": "Document-Driven Development fixes that before the first line of code.",
+  "sub": "Document-Driven Development fixes that before the first line of code.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l04",
+  "text": "First, the business core: who uses it, the real flow, the rules, the exceptions. Agreed in plain words.",
+  "sub": "First, the business core: who uses it, the real flow, the rules, the exceptions. Agreed in plain words.",
+  "voice": "af_heart",
+  "speed": 0.95,
+  "asr": "First, the business corps, who uses it the real flow, the rules, the exceptions, agreed in plain words."
+ },
+ {
+  "id": "l05",
+  "text": "Then check what already exists. Use it, adapt it, or build.",
+  "sub": "Then check what already exists. Use it, adapt it, or build.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l06",
+  "text": "Write short documents: intent, spec, plan. Only what the code can't show.",
+  "sub": "Write short documents: intent, spec, plan. Only what the code can't show.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l07",
+  "text": "Prove it. Every acceptance criterion becomes a check, and one command runs them all.",
+  "sub": "Prove it. Every acceptance criterion becomes a check, and one command runs them all.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l08",
+  "text": "Every bug becomes a new check.",
+  "sub": "Every bug becomes a new check.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l09",
+  "text": "A small change is two sentences and a check run. A new product gets the full flow.",
+  "sub": "A small change is two sentences and a check run. A new product gets the full flow.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l10",
+  "text": "The person knows the business. The agent knows how to build. The documents are where they meet.",
+  "sub": "The person knows the business. The agent knows how to build. The documents are where they meet.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l11",
+  "text": "Slow at the start. Fast throughout.",
+  "sub": "Slow at the start. Fast throughout.",
+  "voice": "af_heart",
+  "speed": 0.95
+ },
+ {
+  "id": "l12",
+  "text": "Works with any agent. Install it in one command.",
+  "sub": "Works with any agent. Install it in one command.",
+  "voice": "af_heart",
+  "speed": 0.95
+ }
+]

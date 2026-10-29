@@ -1,0 +1,88 @@
+[
+ {
+  "id": "l01",
+  "text": "你在 prompt 里省下的十五分钟需求描述，",
+  "sub": "你在 prompt 里省下的十五分钟需求描述，",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l02",
+  "text": "会变成三小时的 debug 账单。",
+  "sub": "会变成三小时的 debug 账单。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l03",
+  "text": "文档驱动开发，在写第一行代码之前解决这件事。",
+  "sub": "文档驱动开发，在写第一行代码之前解决这件事。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l04",
+  "text": "第一步，业务核心：谁在用，流程怎么走，规则和例外是什么，用大白话说清楚。",
+  "sub": "第一步，业务核心：谁在用，流程怎么走，规则和例外是什么，用大白话说清楚。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%",
+  "asr": "第一步，業務核心，誰在用，流程怎麼走，規則和例外是什麼，用大白話說清楚。"
+ },
+ {
+  "id": "l05",
+  "text": "再看看有没有现成方案：直接用，改一改，还是自己做。",
+  "sub": "再看看有没有现成方案：直接用，改一改，还是自己做。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l06",
+  "text": "然后写几份短文档：intent、spec、plan，只写代码里看不出来的。",
+  "sub": "然后写几份短文档：intent、spec、plan，只写代码里看不出来的。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l07",
+  "text": "用检查来证明：每条验收标准都是一条检查，一条命令跑全部。",
+  "sub": "用检查来证明：每条验收标准都是一条检查，一条命令跑全部。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l08",
+  "text": "每个 bug，都变成一条新检查。",
+  "sub": "每个 bug，都变成一条新检查。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l09",
+  "text": "小改动说两三句，再跑一遍检查；新产品才走完整流程。",
+  "sub": "小改动说两三句，再跑一遍检查；新产品才走完整流程。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l10",
+  "text": "人懂业务，Agent 懂怎么做，文档是两者的交汇点。",
+  "sub": "人懂业务，Agent 懂怎么做，文档是两者的交汇点。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ },
+ {
+  "id": "l11",
+  "text": "慢在开头，快在全程。",
+  "sub": "慢在开头，快在全程。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%",
+  "asr": "慢在开头，快在全城。"
+ },
+ {
+  "id": "l12",
+  "text": "任何 Agent 都能用，一条命令安装。",
+  "sub": "任何 Agent 都能用，一条命令安装。",
+  "voice": "zh-CN-XiaoxiaoNeural",
+  "rate": "+6%"
+ }
+]
