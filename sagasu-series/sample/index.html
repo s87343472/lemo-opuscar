@@ -1,0 +1,134 @@
+<!doctype html>
+<html><head><meta charset="utf-8"><title>Personal Agents — News Package Sample</title>
+<style>
+@font-face{font-family:N9;src:url(fonts/noto900.woff2)}@font-face{font-family:N7;src:url(fonts/noto700.woff2)}
+@font-face{font-family:B8;src:url(fonts/barlow800.woff2)}@font-face{font-family:B6;src:url(fonts/barlow600.woff2)}
+@font-face{font-family:PM;src:url(fonts/plex500.woff2)}
+html,body{margin:0;background:#121417;overflow:hidden}canvas{display:block}
+</style></head><body><canvas id="c" width="1920" height="1080"></canvas>
+<script type="module">
+// A 12 s sample of the news-package system: sting → band wipe → one story (naming comparison) with strap, bug, source line, stamp.
+const C = { ink: '#16150F', ink2: '#1E1D16', ink3: '#26251D', acc: '#84A886', accL: '#9DBF9F', accD: '#6C9170', gold: '#C9B48A', paper: '#F6F2E9', olive: '#2F5233' };
+const W = 1920, H = 1080, g = document.getElementById('c').getContext('2d');
+const clamp = (x, a = 0, b = 1) => Math.max(a, Math.min(b, x)), lerp = (a, b, t) => a + (b - a) * t, seg = (t, a, b) => clamp((t - a) / (b - a));
+const eo = t => 1 - Math.pow(1 - clamp(t), 3), eio = t => { t = clamp(t); return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+const back = t => { t = clamp(t); const s = 1.7; return 1 + (s + 1) * Math.pow(t - 1, 3) + s * Math.pow(t - 1, 2); };
+const DUR = 12.0, VO = { v1: 1.9, v2: 5.1, v3: 8.8 };
+const ROWS = [
+  ['OpenClaw', '个人 AI 助手', 'personal AI assistant', 5.15],
+  ['OpenAI', '常驻 Agent', 'always-on agents', null],
+  ['xAI', 'AI 队友', 'AI teammates', 6.45],
+  ['Microsoft', 'AI 伴侣', 'AI companion', 5.75],
+  ['华为  Huawei', '系统级智能体', 'system-level agent', 7.3],
+  ['Anthropic', '不用这类说法', 'no such label', null],
+];
+const font = (f, s, ls = 0) => { g.font = `${s}px ${f}`; g.letterSpacing = ls + 'px'; };
+const plate = (cx, cy, s, letters = 1, glint = -1) => {   // the brand plate: parallelogram 520×180
+  g.save(); g.translate(cx, cy); g.scale(s, s);
+  const k = 40, w = 520, h = 180, path = () => { g.beginPath(); g.moveTo(-w / 2 + k, -h / 2); g.lineTo(w / 2 + k, -h / 2); g.lineTo(w / 2 - k, h / 2); g.lineTo(-w / 2 - k, h / 2); g.closePath(); };
+  const gr = g.createLinearGradient(0, -h / 2, 0, h / 2); gr.addColorStop(0, C.accL); gr.addColorStop(1, C.accD);
+  path(); g.fillStyle = gr; g.fill();
+  g.save(); path(); g.clip();
+  g.fillStyle = C.ink; g.fillRect(-w / 2 - k, -h / 2, 34, h); g.fillStyle = C.gold; g.fillRect(-w / 2 - k + 40, -h / 2, 10, h);
+  if (glint >= 0 && glint <= 1) { const x = lerp(-w, w, glint); const gl = g.createLinearGradient(x - 60, 0, x + 60, 0); gl.addColorStop(0, 'rgba(255,255,255,0)'); gl.addColorStop(.5, 'rgba(255,255,255,.55)'); gl.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gl; g.fillRect(-w, -h, 2 * w, 2 * h); }
+  g.restore();
+  font('B8', 92, 3); g.fillStyle = C.ink; g.textAlign = 'center'; g.textBaseline = 'middle';
+  const word = 'sagasu.art'; let x = -textW(word) / 2 + 20;
+  for (let i = 0; i < word.length; i++) { const p = clamp(letters * word.length - i); if (p > 0) { g.save(); g.globalAlpha = 1; g.fillText(word[i], x + textW(word[i]) / 2, 6 - 60 * (1 - eo(p))); g.restore(); } x += textW(word[i]); }
+  g.restore(); g.textAlign = 'left'; g.textBaseline = 'alphabetic'; g.letterSpacing = '0px';
+};
+const textW = s => g.measureText(s).width;
+// background: ink with two faint light streaks
+function bg(t) {
+  g.fillStyle = C.ink; g.fillRect(0, 0, W, H);
+  for (const [x0, a] of [[300, .05], [1300, .035]]) { const x = x0 + t * 18; const gr = g.createLinearGradient(x - 200, 0, x + 200, 0); gr.addColorStop(0, 'rgba(201,180,138,0)'); gr.addColorStop(.5, `rgba(201,180,138,${a})`); gr.addColorStop(1, 'rgba(201,180,138,0)'); g.save(); g.transform(1, 0, -.35, 1, 0, 0); g.fillStyle = gr; g.fillRect(x - 200, 0, 400, H); g.restore(); }
+}
+function sting(t) {
+  if (t > 1.55) return;
+  for (const [ts, x] of [[.04, 780], [.10, 1120]]) { const p = seg(t, ts, ts + .12); if (p > 0 && t < .5) { g.save(); g.transform(1, 0, -.4, 1, 0, 0); g.fillStyle = C.acc; g.fillRect(x + 300, lerp(-300, 0, p), 26, H * eo(p)); g.restore(); } }
+  if (t < .16) return;
+  const land = seg(t, .16, .42), s0 = lerp(2.2, 1, eo(land)) * (1 + .06 * Math.sin(land * 9) * (1 - land));
+  const shake = t < .6 ? (1 - seg(t, .42, .6)) * 10 * Math.sin(t * 90) : 0;
+  const fly = eio(seg(t, 1.2, 1.5));
+  const cx = lerp(960, 1739, fly) + shake, cy = lerp(500, 86, fly), s = lerp(s0, .327, fly);
+  if (land >= 1 && t < .75) { const r = seg(t, .42, .75); g.strokeStyle = `rgba(132,168,134,${.6 * (1 - r)})`; g.lineWidth = 6; g.beginPath(); g.ellipse(960, 500, 300 + 500 * r, 120 + 200 * r, 0, 0, 7); g.stroke(); }
+  plate(cx, cy, s, seg(t, .42, .8), seg(t, 1.0, 1.2));
+  const dl = t < 1.2 ? seg(t, .8, 1.0) : 0;
+  if (dl > 0) { g.save(); g.beginPath(); g.rect(960 - 400 * dl, 600, 800 * dl, 70); g.clip(); font('N7', 34, 4); g.fillStyle = C.paper; g.textAlign = 'center'; g.fillText('谁在定义个人智能体', 960, 640); font('PM', 18, 4); g.fillStyle = C.gold; g.fillText('WHO DEFINES PERSONAL AGENTS · 2026', 960, 666); g.restore(); g.textAlign = 'left'; g.letterSpacing = '0px'; }
+}
+function bug(t) { if (t >= 1.5) plate(1739, 86, .327, 1, -1); }
+// the story: a naming comparison card
+function story(t) {
+  if (t < 1.5) return;
+  const x0 = 96, y0 = 150, x1 = 1824, y1 = 830;
+  g.fillStyle = C.ink2; g.fillRect(x0, y0, x1 - x0, y1 - y0);
+  g.fillStyle = C.acc; g.fillRect(x0, y0, (x1 - x0) * eo(seg(t, 1.6, 2.0)), 5);
+  font('PM', 20, 3); g.fillStyle = C.gold; g.fillText('2026 · NAMING · 叫法对照', x0 + 48, y0 + 52);
+  font('PM', 16, 3); g.fillStyle = 'rgba(244,241,232,.45)';
+  g.fillText('WHO', x0 + 48, y0 + 92); g.fillText('WHAT THEY CALL IT', x0 + 560, y0 + 92); g.fillText('ORIGINAL WORDING', x0 + 1160, y0 + 92);
+  ROWS.forEach(([who, zh, en, hl], i) => {
+    const ti = 2.25 + i * .5, p = seg(t, ti, ti + .32); if (p <= 0) return;
+    const y = y0 + 128 + i * 92, k = back(p);
+    g.save(); g.beginPath(); g.rect(x0, y, x1 - x0, 88); g.clip(); g.translate(0, (1 - k) * 88);
+    g.fillStyle = i % 2 ? C.ink2 : C.ink3; g.fillRect(x0 + 24, y + 4, x1 - x0 - 48, 80);
+    font(/[一-鿿]/.test(who) ? 'N7' : 'B8', 44, 1); g.fillStyle = C.paper; g.fillText(who, x0 + 48, y + 60);
+    font('N9', 50); g.fillStyle = C.paper; g.fillText(zh, x0 + 560, y + 62);
+    if (hl) { const u = eo(seg(t, hl, hl + .25)); font('N9', 50); g.fillStyle = C.acc; g.fillRect(x0 + 560, y + 74, textW(zh) * u, 6); }
+    font('B6', 34, 1); g.fillStyle = 'rgba(244,241,232,.62)'; g.fillText(en, x0 + 1160, y + 58);
+    if (p < 1) { const gx = lerp(x0, x1, p); const gl = g.createLinearGradient(gx - 80, 0, gx + 80, 0); gl.addColorStop(0, 'rgba(255,255,255,0)'); gl.addColorStop(.5, 'rgba(255,255,255,.18)'); gl.addColorStop(1, 'rgba(255,255,255,0)'); g.fillStyle = gl; g.fillRect(x0, y, x1 - x0, 88); }
+    g.restore();
+  });
+  // the verdict stamp
+  const st = seg(t, 9.0, 9.16);
+  if (st > 0) {
+    if (st >= 1 && t < 9.5) { const r = seg(t, 9.16, 9.5); g.strokeStyle = `rgba(132,168,134,${.7 * (1 - r)})`; g.lineWidth = 5; g.beginPath(); g.ellipse(1620, 235, 220 + 160 * r, 90 + 60 * r, -.14, 0, 7); g.stroke(); }
+    g.save(); g.translate(1620, 235); g.rotate(-.14); const s = lerp(1.9, 1, eo(st)); g.scale(s, s);
+    g.fillStyle = C.acc; g.fillRect(-200, -70, 400, 140); g.strokeStyle = C.ink; g.lineWidth = 4; g.strokeRect(-188, -58, 376, 116);
+    font('N9', 54, 6); g.fillStyle = C.ink; g.textAlign = 'center'; g.fillText('名字即立场', 0, 8); font('B8', 26, 6); g.fillText('NAME = STANCE', 0, 44);
+    g.restore(); g.textAlign = 'left'; g.letterSpacing = '0px';
+  }
+}
+// the lower-third strap
+function strap(t) {
+  if (t < 1.75) return;
+  const p = eo(seg(t, 1.75, 2.15)), sx = lerp(-1500, 0, p);
+  g.save(); g.translate(sx, 0);
+  font('N9', 28); const tab = '定义  DEFINITIONS'; g.letterSpacing = '2px';
+  g.fillStyle = C.acc; g.fillRect(96, 856, textW(tab) + 40, 48); g.fillStyle = C.ink; g.fillText(tab, 116, 890);
+  g.fillStyle = C.paper; g.fillRect(96, 904, 1250, 104); g.fillStyle = C.ink; g.fillRect(1346, 904, 120, 104);
+  g.fillStyle = C.acc; g.fillRect(1346, 904, 6, 104);
+  font('N9', 50); g.fillStyle = C.ink; g.fillText('同一个东西，好几种叫法', 124, 962);
+  font('B6', 27, 1); g.fillStyle = C.olive; g.fillText('One kind of product, many names', 126, 994);
+  font('PM', 20, 2); g.fillStyle = C.acc; g.textAlign = 'center'; g.fillText('2026', 1406, 950); g.fillStyle = C.paper; g.fillText('10·22', 1406, 978); g.textAlign = 'left';
+  g.restore(); g.letterSpacing = '0px';
+  if (t > 2.2) { g.textAlign = 'right'; font('PM', 13, 2); g.fillStyle = 'rgba(201,180,138,.75)'; g.fillText('SOURCE: SAGASU.ART · 2026-10-22', 1836, 950); font('N7', 16); g.fillText('来源：Sagasu《个人智能体元年》整理', 1836, 978); g.textAlign = 'left'; }
+}
+// vertical band wipe into the story (accent 84 + ink 5 + gold 14)
+function wipe(t) {
+  const p = seg(t, 1.35, 1.65); if (p <= 0 || p >= 1) return;
+  const x = lerp(-120, W + 20, eio(p));
+  g.fillStyle = C.acc; g.fillRect(x, 0, 84, H); g.fillStyle = C.ink; g.fillRect(x + 84, 0, 5, H); g.fillStyle = C.gold; g.fillRect(x + 89, 0, 14, H);
+}
+window.render = t => {
+  bg(t);
+  if (t < 1.5) sting(t);
+  if (t >= 1.35) { const p = seg(t, 1.35, 1.65); g.save(); if (p < 1) { const x = lerp(-120, W + 20, eio(p)); g.beginPath(); g.rect(0, 0, x, H); g.clip(); bg(t); } story(Math.max(t, 1.5)); strap(t); g.restore(); }
+  if (t >= 1.5) bug(t);
+  wipe(t);
+};
+window.DUR = DUR;
+const EV = [{ t: 0.04, type: 'slash' }, { t: .10, type: 'slash' }, { t: .3, type: 'impact' }, { t: 1.0, type: 'glint' }, { t: 1.25, type: 'whoosh' }, { t: 1.4, type: 'band' }, { t: 1.8, type: 'strap' }];
+ROWS.forEach((r, i) => { EV.push({ t: 2.25 + i * .5, type: 'flip' }); if (r[3]) EV.push({ t: r[3], type: 'tick' }); });
+EV.push({ t: 9.0, type: 'stamp' });
+for (const [id, t] of Object.entries(VO)) EV.push({ t, type: 'vo', id });
+window.EV = EV;
+window.TEXTS = t => {
+  const o = [];
+  if (t > 5.0) o.push({ id: 'card', text: ROWS.map(r => r[0] + r[1] + r[2]).join(' ').slice(0, 60), x0: 96, y0: 150, x1: 1824, y1: 830 });
+  if (t > 2.2) o.push({ id: 'strap', text: '同一个东西，好几种叫法 One kind of product, many names', x0: 96, y0: 856, x1: 1466, y1: 1008 });
+  if (t > 9.0) o.push({ id: 'stamp', text: '名字即立场 NAME = STANCE', x0: 1400, y0: 140, x1: 1840, y1: 340 });
+  return o;
+};
+await Promise.all(['900 40px N9', '40px N7', '40px B8', '40px B6', '40px PM'].map(f => document.fonts.load(f, '同一个东西好几种叫法名字即立场来源 Sagasu')));
+window.READY = true;
+</script></body></html>
